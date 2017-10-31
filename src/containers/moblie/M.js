@@ -1,12 +1,81 @@
 import React from 'react';
 import {observer} from 'mobx-react';
 import globalStore from '../../stores/GlobalStore';
-
+import { TreeSelect,Layout ,Icon } from 'antd';
+const SHOW_PARENT = TreeSelect.SHOW_PARENT;
+import 'antd/dist/antd.css';
+import medicinal from '../../containers/moblie/medicinal.json';
+const { Header, Footer, Sider, Content } = Layout;
 @observer
 export default class M extends React.Component {
+    constructor(props){
+      super(props);
+      this.state ={
+          treeData:[]
+      }
+    }
+
+    componentWillMount(){
+        this.getTreeData();
+    }
+
+    getTreeData =()=>{
+        let treeData = medicinal.treeData;
+        treeData.forEach((A,B)=>{
+            A.key = "0-" + B;
+            A.value = "0-" + B;
+            A.children.forEach((C,D)=>{
+                C.key= "0-" + B +"-" +D ;
+                C.value = "0-" + B  +"-"  + D;
+                C.children.forEach((E,F)=>{
+                    E.key= "0-" + B  +"-"  + D +"-" + F;
+                    E.value = "0-" + B  +"-"  + D +"-" + F;
+                    E.children.forEach((G,H)=>{
+                        G.key=  "0-" + B  +"-"  + D +"-" + F +"-" + H;
+                        G.value = "0-" + B  +"-"  + D +"-" + F +"-" + H;
+                    })
+                })
+            })
+        })
+        this.setState({
+            treeData
+        })
+
+
+    }
+
+    onChange = (value) => {
+        console.log('onChange ', value, arguments);
+        this.setState({ value });
+    }
+
+    exit =() =>{
+        window.location.hash ="#/login"
+
+    }
     render(){
+        let treeData = this.state.treeData ;
+        const tProps = {
+            treeData,
+            value: this.state.value,
+            onChange: this.onChange,
+            treeCheckable: true,
+            showCheckedStrategy: SHOW_PARENT,
+            searchPlaceholder: '请选择药物',
+            style: {
+                width: 300,
+            },
+        };
         return (
-            <div>123</div>
+          <div>
+              <div className="m-header">
+                  <span style={{"float":"left","marginLeft":"10px"}} onClick={this.exit}><Icon type="menu-fold"/></span>
+                  <Icon type="solution"/> 欢迎进入{this.props.params.pk}系统</div>
+              <div className="m-content">
+                    <TreeSelect {...tProps} />
+              </div>
+
+          </div>
         )
     }
 }

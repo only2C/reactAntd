@@ -1,0 +1,52 @@
+{
+  "result":0,
+  "treeData":[
+    {
+      "label":"一级菜单1",
+      "children":[
+        {
+          "label":"2菜单A-2-2",
+          "children":[
+            {
+              "label":"2菜单A-2-2-3",
+              "children":[
+                {
+                  "label":"2菜单A-2-2-3-4"
+                },
+                {
+                  "label":"21菜单A-2-2-3-4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "label":"一级菜单2",
+      "children":[
+        {
+          "label":"2菜单B-2-2",
+          "children":[
+            {
+              "label":"2菜单B-2-2-3",
+              "children":[
+                {
+                  "label":"2菜单B-2-2-3-4"
+                },
+                {
+                  "label":"21菜单B-2-2-3-4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+
+
+
+  ]
+}
