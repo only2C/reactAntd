@@ -6,6 +6,7 @@ let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let CleanWebpackPlugin = require('clean-webpack-plugin');
 let Config =  require('./config')
+var nodemailer  = require('nodemailer');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const Service = Config[process.env.server || 'dev']
 
@@ -31,6 +32,11 @@ if(isPro){
 }else{
   console.log('开发版本：'+process.env.server || 'dev')
 }
+
+
+
+
+
 let plugins = []
 if(isPro){
   plugins.push(
