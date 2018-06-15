@@ -7,19 +7,13 @@ import * as mobxReact from 'mobx-react';
 
 import $ from 'jquery';
 import Config from './config';
+import './less/index.less';
 import 'rc-tree/assets/index.css'
-import './less/ybz-index.less';
 import GlobalStore from './stores/GlobalStore';
 import App from './containers/App';
 import Bundle from './bundle.js';
 
-
-import LoanBillContainer  from 'bundle-loader?lazy&name=app-[name]!./containers/webreimburse/LoanBill';
-import MContainer  from 'bundle-loader?lazy&name=app-[name]!./containers/moblie/M';
 import LoginContainer  from 'bundle-loader?lazy&name=app-[name]!./containers/moblie/Login';
-
-const LoanBill  = (props) => (<Bundle load={LoanBillContainer} {...props}>{ (Page) => <Page {...props} />}</Bundle>)
-const M = (props) => (<Bundle load={MContainer} {...props}>{ (Page) => <Page {...props} />}</Bundle>)
 const Login = (props) => (<Bundle load={LoginContainer} {...props}>{ (Page) => <Page {...props} />}</Bundle>)
 
 const requireAuth = (nextState, replace, next) => {
@@ -33,12 +27,9 @@ const requireAuth = (nextState, replace, next) => {
 }
 
 
-
 ReactDom.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <Route path="/loanBill/:type/:billTypePk" component={LoanBill}/>
-      <Route path="/m/:pk" component={M}/>
       <Route path="/login" component={Login}/>
     </Route>
   </Router>,
